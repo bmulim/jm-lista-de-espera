@@ -99,7 +99,7 @@ const StudentForm = ({ onSubmit, onCancel }: StudentFormProps) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className={styles.title}>Cadastrar Novo Aluno</h2>
+      <h2 className={styles.title}>Entrar na fila de espera</h2>
 
       <div className={styles.formGrid}>
         <div className={styles.formGroup}>

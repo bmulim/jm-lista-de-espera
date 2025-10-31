@@ -140,7 +140,7 @@ function App() {
             className={`toggleButton ${showForm ? "secondary" : ""}`}
             disabled={loading}
           >
-            {showForm ? "Ver Lista de Espera" : "Cadastrar Novo Aluno"}
+            {showForm ? "Ver Lista de Espera" : "Entrar na fila de espera"}
           </button>
         </div>
 

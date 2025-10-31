@@ -143,7 +143,7 @@ As cores principais estão definidas nos arquivos CSS. Para alterar:
 ## 🔄 Fluxo de Uso
 
 1. Acesse a aplicação
-2. Clique em "Cadastrar Novo Aluno"
+2. Clique em "Entrar na fila de espera"
 3. Preencha o formulário
 4. O aluno é adicionado à lista de espera
 5. Na lista, gerencie as matrículas com os botões de ação
