@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Student, StudentFormData } from "./types";
-import { storageService } from "./services/storageService";
+import { apiService, ApiError } from "./services/apiService";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import StudentForm from "./components/StudentForm/StudentForm";
@@ -17,6 +17,7 @@ interface NotificationState {
 function App() {
   const [students, setStudents] = useState<Student[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState<NotificationState>({
     message: "",
     type: "success",
@@ -35,77 +36,113 @@ function App() {
   };
 
   useEffect(() => {
-    const storedStudents = storageService.getStudents();
-    // Ordenar por data de cadastro (mais antigos primeiro)
-    const sortedStudents = storedStudents.sort(
-      (a, b) =>
-        new Date(a.enrollmentDate).getTime() -
-        new Date(b.enrollmentDate).getTime()
-    );
-    setStudents(sortedStudents);
+    const loadStudents = async () => {
+      try {
+        setLoading(true);
+        const data = await apiService.getStudents();
+        setStudents(data);
+      } catch (error) {
+        console.error("Erro ao carregar estudantes:", error);
+        showNotification("Erro ao carregar a lista de estudantes", "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadStudents();
   }, []);
 
-  const handleAddStudent = (studentData: StudentFormData) => {
-    const newStudent = storageService.addStudent(studentData);
-    setStudents((prev) => {
-      const updated = [...prev, newStudent];
-      // Manter ordenação por data de cadastro
-      return updated.sort(
-        (a, b) =>
-          new Date(a.enrollmentDate).getTime() -
-          new Date(b.enrollmentDate).getTime()
+  const handleAddStudent = async (studentData: StudentFormData) => {
+    try {
+      setLoading(true);
+      const newStudent = await apiService.addStudent(studentData);
+      setStudents((prev) =>
+        [...prev, newStudent].sort(
+          (a, b) =>
+            new Date(a.enrollmentDate).getTime() -
+            new Date(b.enrollmentDate).getTime()
+        )
       );
-    });
-    setShowForm(false);
-    showNotification(
-      `${studentData.name} foi adicionado à lista de espera!`,
-      "success"
-    );
-  };
-
-  const handleEnrollStudent = (id: string) => {
-    const student = students.find((s) => s.id === id);
-    const enrolledAt = new Date().toISOString();
-    storageService.updateStudent(id, { isEnrolled: true, enrolledAt });
-    setStudents((prev) =>
-      prev.map((student) =>
-        student.id === id
-          ? { ...student, isEnrolled: true, enrolledAt }
-          : student
-      )
-    );
-    if (student) {
+      setShowForm(false);
       showNotification(
-        `${student.name} foi matriculado com sucesso!`,
+        `${studentData.name} foi adicionado à lista de espera!`,
         "success"
       );
+    } catch (error) {
+      console.error("Erro ao adicionar estudante:", error);
+      if (error instanceof ApiError && error.status === 400) {
+        showNotification(error.message, "error");
+      } else {
+        showNotification("Erro ao adicionar estudante à lista", "error");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleUnenrollStudent = (id: string) => {
+  const handleEnrollStudent = async (id: string) => {
     const student = students.find((s) => s.id === id);
-    storageService.updateStudent(id, {
-      isEnrolled: false,
-      enrolledAt: undefined,
-    });
-    setStudents((prev) =>
-      prev.map((student) =>
-        student.id === id
-          ? { ...student, isEnrolled: false, enrolledAt: undefined }
-          : student
-      )
-    );
-    if (student) {
-      showNotification(`${student.name} foi desmatriculado.`, "info");
+    try {
+      setLoading(true);
+      const result = await apiService.enrollStudent(id);
+      setStudents((prev) =>
+        prev.map((student) =>
+          student.id === id
+            ? { ...student, isEnrolled: true, enrolledAt: result.enrolledAt }
+            : student
+        )
+      );
+      if (student) {
+        showNotification(
+          `${student.name} foi matriculado com sucesso!`,
+          "success"
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao matricular estudante:", error);
+      showNotification("Erro ao matricular estudante", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleDeleteStudent = (id: string) => {
+  const handleUnenrollStudent = async (id: string) => {
     const student = students.find((s) => s.id === id);
-    storageService.deleteStudent(id);
-    setStudents((prev) => prev.filter((student) => student.id !== id));
-    if (student) {
-      showNotification(`${student.name} foi removido da lista.`, "warning");
+    try {
+      setLoading(true);
+      await apiService.unenrollStudent(id);
+      setStudents((prev) =>
+        prev.map((student) =>
+          student.id === id
+            ? { ...student, isEnrolled: false, enrolledAt: undefined }
+            : student
+        )
+      );
+      if (student) {
+        showNotification(`${student.name} foi desmatriculado.`, "info");
+      }
+    } catch (error) {
+      console.error("Erro ao desmatricular estudante:", error);
+      showNotification("Erro ao desmatricular estudante", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteStudent = async (id: string) => {
+    const student = students.find((s) => s.id === id);
+    try {
+      setLoading(true);
+      await apiService.deleteStudent(id);
+      setStudents((prev) => prev.filter((student) => student.id !== id));
+      if (student) {
+        showNotification(`${student.name} foi removido da lista.`, "warning");
+      }
+    } catch (error) {
+      console.error("Erro ao remover estudante:", error);
+      showNotification("Erro ao remover estudante", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -118,10 +155,19 @@ function App() {
           <button
             onClick={() => setShowForm(!showForm)}
             className={`toggleButton ${showForm ? "secondary" : ""}`}
+            disabled={loading}
           >
-            {showForm ? "Ver Lista de Espera" : "Entrar na Lista de Espera"}
+            {showForm ? "Ver Lista de Espera" : "Cadastrar Novo Aluno"}
           </button>
         </div>
+
+        {loading && (
+          <div
+            style={{ textAlign: "center", color: "#d4af37", padding: "2rem" }}
+          >
+            Carregando...
+          </div>
+        )}
 
         {showForm ? (
           <StudentForm
