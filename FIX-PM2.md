@@ -10,10 +10,12 @@ ReferenceError: module is not defined in ES module scope
 ## ✅ Solução Aplicada:
 
 ### 1. **Arquivo Renomeado:**
+
 - `ecosystem.config.js` → `ecosystem.config.cjs`
 - Isso força o Node.js a tratar como CommonJS
 
 ### 2. **Comando Correto:**
+
 ```bash
 # ❌ Antigo (erro)
 pm2 start ecosystem.config.js
@@ -23,6 +25,7 @@ pm2 start ecosystem.config.cjs
 ```
 
 ### 3. **Arquivos Atualizados:**
+
 - ✅ `README-FINAL.md`
 - ✅ `DEPLOY-VPS.md`
 - ✅ Todas as referências corrigidas
@@ -48,6 +51,7 @@ pm2 save
 **PROBLEMA RESOLVIDO! 🎉**
 
 O deploy no VPS agora funcionará corretamente com:
+
 ```bash
 pm2 start ecosystem.config.cjs
 ```
