@@ -5,7 +5,7 @@ export interface Student {
   whatsapp: string;
   objective: string;
   healthRestrictions: string;
-  shift: 'morning' | 'afternoon' | 'evening';
+  shift: "morning" | "afternoon" | "evening";
   enrollmentDate: string;
   isEnrolled: boolean;
   enrolledAt?: string;
@@ -17,5 +17,5 @@ export interface StudentFormData {
   whatsapp: string;
   objective: string;
   healthRestrictions: string;
-  shift: 'morning' | 'afternoon' | 'evening';
+  shift: "morning" | "afternoon" | "evening";
 }

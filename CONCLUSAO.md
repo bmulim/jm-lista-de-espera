@@ -5,6 +5,7 @@
 ### 🏗️ O que foi desenvolvido:
 
 **Frontend React:**
+
 - ✅ Interface moderna e responsiva
 - ✅ Formulários validados
 - ✅ Sistema de notificações
@@ -13,6 +14,7 @@
 - ✅ TypeScript completo
 
 **Backend Express:**
+
 - ✅ API RESTful completa
 - ✅ Banco SQLite com triggers
 - ✅ Validação de dados
@@ -21,6 +23,7 @@
 - ✅ TypeScript completo
 
 **Deploy e Infraestrutura:**
+
 - ✅ Scripts de deploy prontos
 - ✅ Configuração PM2
 - ✅ Configuração Nginx
@@ -46,11 +49,13 @@ npm start
 ### 📱 URLs do Sistema:
 
 **Desenvolvimento:**
+
 - Frontend: http://localhost:5173
 - Backend: http://localhost:3000
 - API: http://localhost:3000/api
 
 **Produção:**
+
 - Frontend: https://seudominio.com
 - API: https://seudominio.com/api
 - Health: https://seudominio.com/health
@@ -58,16 +63,19 @@ npm start
 ### 🎯 Funcionalidades Implementadas:
 
 1. **Cadastro de Estudantes**
+
    - Nome, email, WhatsApp
    - Objetivo, restrições de saúde
    - Seleção de turno
 
 2. **Gerenciamento de Matrículas**
+
    - Matricular/desmatricular
    - Status visual claro
    - Controle cronológico
 
 3. **Interface Administrativa**
+
    - Lista responsiva
    - Filtros e ordenação
    - Estatísticas em tempo real
