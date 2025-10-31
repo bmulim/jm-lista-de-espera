@@ -1,0 +1,74 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+.toggleContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.toggleButton {
+  background-color: #d4af37;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.toggleButton:hover {
+  background-color: #f0c25a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.toggleButton.secondary {
+  background-color: transparent;
+  color: #d4af37;
+  border: 2px solid #d4af37;
+}
+
+.toggleButton.secondary:hover {
+  background-color: #d4af37;
+  color: #1a1a1a;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .toggleButton {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 0.5rem;
+  }
+
+  .toggleButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    min-width: 120px;
+  }
+}
