@@ -129,23 +129,6 @@ function App() {
     }
   };
 
-  const handleDeleteStudent = async (id: string) => {
-    const student = students.find((s) => s.id === id);
-    try {
-      setLoading(true);
-      await apiService.deleteStudent(id);
-      setStudents((prev) => prev.filter((student) => student.id !== id));
-      if (student) {
-        showNotification(`${student.name} foi removido da lista.`, "warning");
-      }
-    } catch (error) {
-      console.error("Erro ao remover estudante:", error);
-      showNotification("Erro ao remover estudante", "error");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="app">
       <Header />
@@ -179,7 +162,6 @@ function App() {
             students={students}
             onEnroll={handleEnrollStudent}
             onUnenroll={handleUnenrollStudent}
-            onDelete={handleDeleteStudent}
           />
         )}
       </main>

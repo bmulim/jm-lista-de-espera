@@ -79,7 +79,6 @@ sudo systemctl restart nginx
 - `POST /api/students` - Criar estudante
 - `PUT /api/students/:id/enroll` - Matricular
 - `PUT /api/students/:id/unenroll` - Desmatricular
-- `DELETE /api/students/:id` - Remover
 - `GET /health` - Health check
 
 ## 💾 Banco de Dados

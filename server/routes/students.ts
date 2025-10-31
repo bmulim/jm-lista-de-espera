@@ -165,26 +165,4 @@ router.put("/:id/unenroll", (req, res) => {
   });
 });
 
-// DELETE /api/students/:id - Remover estudante
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-
-  const sql = "DELETE FROM students WHERE id = ?";
-
-  db.run(sql, [id], function (err) {
-    if (err) {
-      console.error("Erro ao remover estudante:", err);
-      res.status(500).json({ error: "Erro interno do servidor" });
-      return;
-    }
-
-    if (this.changes === 0) {
-      res.status(404).json({ error: "Estudante não encontrado" });
-      return;
-    }
-
-    res.json({ message: "Estudante removido com sucesso" });
-  });
-});
-
 export default router;

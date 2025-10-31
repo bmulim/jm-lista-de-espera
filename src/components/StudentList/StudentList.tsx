@@ -5,14 +5,12 @@ interface StudentListProps {
   students: Student[];
   onEnroll: (id: string) => void;
   onUnenroll: (id: string) => void;
-  onDelete: (id: string) => void;
 }
 
 const StudentList = ({
   students,
   onEnroll,
   onUnenroll,
-  onDelete,
 }: StudentListProps) => {
   if (students.length === 0) {
     return (
@@ -45,14 +43,6 @@ const StudentList = ({
       evening: "Noite",
     };
     return labels[shift as keyof typeof labels] || shift;
-  };
-
-  const handleDelete = (id: string, studentName: string) => {
-    if (
-      window.confirm(`Tem certeza que deseja remover ${studentName} da lista?`)
-    ) {
-      onDelete(id);
-    }
   };
 
   return (
@@ -152,12 +142,6 @@ const StudentList = ({
                 Matricular
               </button>
             )}
-            <button
-              onClick={() => handleDelete(student.id, student.name)}
-              className={`${styles.button} ${styles.deleteButton}`}
-            >
-              Remover
-            </button>
           </div>
         </div>
       ))}
