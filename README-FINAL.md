@@ -50,7 +50,7 @@ scp -r . usuario@ip:/var/www/lista-de-espera/
 cd /var/www/lista-de-espera
 npm install
 npm run build
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 
 # 4. Configurar Nginx
 sudo cp nginx/lista-de-espera.conf /etc/nginx/sites-available/
@@ -70,7 +70,7 @@ sudo systemctl restart nginx
 ├── data/               # Banco SQLite
 ├── scripts/            # Scripts deploy
 ├── nginx/              # Config Nginx
-└── ecosystem.config.js # Config PM2
+└── ecosystem.config.cjs # Config PM2
 ```
 
 ## 🔗 API Endpoints
@@ -152,7 +152,7 @@ CORS_ORIGIN=https://seudominio.com
 2. **Instalar**: Node.js + PM2 + Nginx
 3. **Upload**: Código para `/var/www/lista-de-espera`
 4. **Build**: `npm install && npm run build`
-5. **Iniciar**: `pm2 start ecosystem.config.js`
+5. **Iniciar**: `pm2 start ecosystem.config.cjs`
 6. **Nginx**: Configurar proxy reverso
 7. **SSL**: `sudo certbot --nginx`
 

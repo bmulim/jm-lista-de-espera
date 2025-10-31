@@ -99,7 +99,7 @@ npm run build
 
 ```bash
 # Iniciar aplicação
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 
 # Configurar para iniciar automaticamente
 pm2 startup
@@ -224,7 +224,7 @@ cp /var/www/lista-de-espera/data/students.db ~/backup_$(date +%Y%m%d_%H%M%S).db
 ├── server/             # Código do backend
 ├── src/                # Código do frontend
 ├── .env                # Variáveis de ambiente
-├── ecosystem.config.js # Config PM2
+├── ecosystem.config.cjs # Config PM2
 └── package.json
 ```
 
@@ -267,7 +267,7 @@ sudo chown -R $USER:$USER /var/www/lista-de-espera/data/
 # Verificar uso de memória
 pm2 monit
 
-# Configurar limite no ecosystem.config.js
+# Configurar limite no ecosystem.config.cjs
 max_memory_restart: '500M'
 ```
 
