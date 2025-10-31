@@ -5,7 +5,7 @@
 ✅ **VPS funcionando**  
 ✅ **Domínio apontando para o IP do VPS**  
 ✅ **Nginx configurado**  
-✅ **Aplicação rodando (PM2)**  
+✅ **Aplicação rodando (PM2)**
 
 ## 🌐 1. Configurar Domínio
 
@@ -16,7 +16,7 @@ Tipo: A
 Nome: @
 Valor: IP_DO_SEU_VPS
 
-Tipo: A  
+Tipo: A
 Nome: www
 Valor: IP_DO_SEU_VPS
 ```
@@ -37,12 +37,14 @@ sudo apt install certbot python3-certbot-nginx -y
 ## 🔐 3. Obter Certificado SSL
 
 ### Opção 1: SSL Automático (Recomendado)
+
 ```bash
 # Substitua pelo seu domínio real (sem www duplicado)
 sudo certbot --nginx -d jmfitnessstudio.com.br -d www.jmfitnessstudio.com.br
 ```
 
 ### Opção 2: SSL Manual
+
 ```bash
 # Apenas obter certificado (sem configurar nginx)
 sudo certbot certonly --nginx -d seudominio.com -d www.seudominio.com
@@ -59,6 +61,7 @@ Share email: N (No)
 ```
 
 **Resultado esperado:**
+
 ```
 Successfully received certificate.
 Certificate is saved at: /etc/letsencrypt/live/seudominio.com/fullchain.pem
@@ -130,10 +133,12 @@ sudo systemctl status nginx
 ## 🌐 8. Testar SSL
 
 **Acesse no navegador:**
+
 - ✅ `https://seudominio.com` (deve funcionar)
 - ✅ `http://seudominio.com` (deve redirecionar para HTTPS)
 
 **Ferramentas de teste:**
+
 - SSL Labs: https://www.ssllabs.com/ssltest/
 - SSL Checker: https://www.sslchecker.com/
 
@@ -145,6 +150,7 @@ nano /var/www/lista-de-espera/.env
 ```
 
 **Atualizar para:**
+
 ```env
 PORT=3000
 NODE_ENV=production
@@ -160,6 +166,7 @@ pm2 restart lista-de-espera
 ## 🚨 Soluções de Problemas
 
 ### Erro: "DNS resolution failed"
+
 ```bash
 # Verificar se domínio aponta para VPS
 nslookup seudominio.com
@@ -167,6 +174,7 @@ ping seudominio.com
 ```
 
 ### Erro: "Port 80 already in use"
+
 ```bash
 # Parar serviços que usam porta 80
 sudo systemctl stop apache2  # se existir
@@ -175,6 +183,7 @@ sudo systemctl start nginx
 ```
 
 ### Certificado não renova
+
 ```bash
 # Verificar log
 sudo tail -f /var/log/letsencrypt/letsencrypt.log
@@ -203,6 +212,6 @@ sudo certbot renew --force-renewal
 ✅ **Certificado válido por 90 dias**  
 ✅ **Renovação automática**  
 ✅ **Redirecionamento HTTP → HTTPS**  
-✅ **Nota A+ no SSL Labs**  
+✅ **Nota A+ no SSL Labs**
 
 **URL final: https://seudominio.com**

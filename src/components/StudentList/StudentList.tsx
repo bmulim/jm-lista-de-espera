@@ -7,11 +7,7 @@ interface StudentListProps {
   onUnenroll: (id: string) => void;
 }
 
-const StudentList = ({
-  students,
-  onEnroll,
-  onUnenroll,
-}: StudentListProps) => {
+const StudentList = ({ students, onEnroll, onUnenroll }: StudentListProps) => {
   if (students.length === 0) {
     return (
       <div className={styles.container}>

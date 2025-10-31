@@ -345,3 +345,77 @@ Para problemas específicos:
 - [ ] Monitoramento funcionando
 
 **🎉 Aplicação pronta para produção!**
+
+---
+
+## 🛡️ ATUALIZAÇÃO: FUNCIONALIDADE DE DELETAR REMOVIDA
+
+### ✅ Mudanças de Segurança Implementadas
+
+**Data**: Implementado em $(date)
+
+#### Frontend (Removido):
+
+- ❌ Botão "Deletar" nos cards de estudante
+- ❌ Função `handleDeleteStudent` no App.tsx
+- ❌ Prop `onDelete` no componente StudentList
+- ❌ Estilos CSS do botão deletar
+
+#### Backend (Removido):
+
+- ❌ Endpoint `DELETE /api/students/:id`
+- ❌ Função de remoção de estudantes da base de dados
+
+### 🚀 Deploy da Atualização
+
+Para aplicar esta atualização no VPS:
+
+```bash
+# 1. Conectar ao VPS
+ssh root@147.79.86.73
+
+# 2. Navegar para o diretório
+cd /root/jm-lista-de-espera
+
+# 3. Atualizar código
+git pull origin main
+
+# 4. Fazer build
+npm run build
+npm run build:server
+
+# 5. Reiniciar PM2
+pm2 restart ecosystem.config.cjs
+
+# 6. Verificar status
+pm2 status
+pm2 logs
+```
+
+### 🔍 Verificar Deploy
+
+1. **Acesse**: https://jmfitnessstudio.com.br
+2. **Teste**: Adicione um estudante
+3. **Confirme**: NÃO existe mais botão "Deletar"
+4. **API**: Tentativa de `DELETE /api/students/1` deve retornar 404
+
+### 📋 Estado Atual do Sistema
+
+**Funcionalidades Disponíveis:**
+
+- ✅ Adicionar estudante à lista de espera
+- ✅ Marcar estudante como matriculado
+- ✅ Desmarcar estudante (volta para lista de espera)
+- ✅ Visualizar lista completa
+- ❌ **Deletar estudante (REMOVIDO por segurança)**
+
+**Benefícios da Remoção:**
+
+1. **Segurança**: Dados não podem ser deletados acidentalmente
+2. **Auditoria**: Histórico completo mantido
+3. **Conformidade**: Melhor aderência a boas práticas LGPD
+4. **Simplicidade**: Interface mais limpa e focada
+
+```
+
+```
