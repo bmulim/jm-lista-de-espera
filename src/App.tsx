@@ -119,7 +119,7 @@ function App() {
             onClick={() => setShowForm(!showForm)}
             className={`toggleButton ${showForm ? "secondary" : ""}`}
           >
-            {showForm ? "Ver Lista de Espera" : "Cadastrar Novo Aluno"}
+            {showForm ? "Ver Lista de Espera" : "Entrar na Lista de Espera"}
           </button>
         </div>
 
