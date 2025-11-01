@@ -83,15 +83,18 @@ sudo systemctl status nginx
 ## 🌐 No Navegador - Limpar Cache
 
 ### Opção 1: Hard Refresh
+
 - **Chrome/Edge**: `Ctrl + Shift + R`
 - **Firefox**: `Ctrl + F5`
 
 ### Opção 2: Limpar Cache Manualmente
+
 1. Abrir Developer Tools (`F12`)
 2. Clicar com botão direito no botão refresh
 3. Selecionar "Empty Cache and Hard Reload"
 
 ### Opção 3: Modo Incógnito
+
 - Abrir uma aba incógnita/privada
 - Acessar o site para ver se aparece
 
@@ -130,6 +133,7 @@ pm2 logs lista-de-espera --lines 5 --nostream
 ## 🧪 Teste Rápido
 
 Para confirmar se funcionou:
+
 1. Acesse: http://147.79.86.73 (direto pelo IP)
 2. Procure pelo texto "Entrar na fila de espera"
 3. Se aparecer, o problema é cache do navegador
