@@ -131,7 +131,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header logoSrc="/logo.svg" logoAlt="JM Fitness Studio" />
 
       <main className="main">
         <div className="toggleContainer">

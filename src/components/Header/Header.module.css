@@ -10,12 +10,18 @@
 
 .logoContainer {
     max-height: 80px;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
     max-height: 80px;
     max-width: 100%;
     object-fit: contain;
+    /* Estilos específicos para SVG */
+    fill: currentColor;
+    width: auto;
+    height: auto;
 }
 
 .title {
